@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflective Application Template - Evangel University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2d5aa0 0%, #1e3c72 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d5aa0 0%, #1e3c72 100%);
+            color: white;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 10px solid #2d5aa0;
+        }
+
+        .header h1 {
+            font-size: 2.6em;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 300;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .eu-logo {
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+
+        .form-section {
+            padding: 35px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #2d5aa0 0%, #1e3c72 100%);
+            color: white;
+            padding: 18px 30px;
+            margin: -35px -35px 30px -35px;
+            font-size: 1.4em;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, rgba(45, 90, 160, 0.3) 0%, rgba(30, 60, 114, 0.3) 100%);
+        }
+
+        .subsection {
+            background: #f8f9fc;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid #2d5aa0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .subsection h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .input-row > div {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.05em;
+        }
+
+        input[type="text"], input[type="date"], textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2d5aa0;
+            box-shadow: 0 0 0 4px rgba(45, 90, 160, 0.1);
+            transform: translateY(-1px);
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .large-textarea {
+            min-height: 130px;
+        }
+
+        .very-large-textarea {
+            min-height: 160px;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .rating-scale input[type="radio"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+
+        .rating-scale label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .rating-item {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            font-family: 'Georgia', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2d5aa0 0%, #1e3c72 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 90, 160, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .export-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 700px;
+            max-height: 85%;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .modal-header h3 {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .export-text {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            height: 450px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .progress-indicator {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #2d5aa0 0%, #1e3c72 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .input-row, .rating-group {
+                flex-direction: column;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .rating-item {
+                min-width: 100%;
+            }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid #ffd93d;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .insight-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #2d5aa0;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reflective Application Template</h1>
+            <div class="subtitle">Connect Learning to Life and Purpose</div>
+            <div class="eu-logo">EVANGEL UNIVERSITY</div>
+        </div>
+
+        <div class="progress-indicator">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <form id="reflectiveForm">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <div class="section-header">Student & Subject Information</div>
+                <div class="input-row">
+                    <div>
+                        <label for="studentName">Student Name:</label>
+                        <input type="text" id="studentName" name="studentName" required>
+                    </div>
+                    <div>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div>
+                        <label for="subject">Subject/Course:</label>
+                        <input type="text" id="subject" name="subject" required placeholder="e.g., Introduction to Psychology">
+                    </div>
+                    <div>
+                        <label for="concept">Concept/Topic:</label>
+                        <input type="text" id="concept" name="concept" required placeholder="e.g., Classical Conditioning">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Understanding the Concept -->
+            <div class="form-section">
+                <div class="section-header">Understanding the Concept</div>
+                
+                <div class="subsection">
+                    <h3><span class="insight-icon">1</span>Core Knowledge</h3>
+                    <div class="input-group">
+                        <label for="definition">Define the concept in your own words:</label>
+                        <textarea id="definition" name="definition" class="large-textarea" placeholder="Explain what this concept means to you..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="keyPrinciples">Key principles or components:</label>
+                        <textarea id="keyPrinciples" name="keyPrinciples" class="large-textarea" placeholder="What are the main parts or principles of this concept?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="broaderContext">How does this fit into the broader subject area?</label>
+                        <textarea id="broaderContext" name="broaderContext" placeholder="How does this concept relate to the overall field of study?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">2</span>Learning Source</h3>
+                    <div class="input-group">
+                        <label for="learningSource">Where did I encounter this? (lecture, reading, lab, etc.)</label>
+                        <textarea id="learningSource" name="learningSource" placeholder="Describe where and how you learned about this concept..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="keyFigures">Who were the key theorists/researchers mentioned?</label>
+                        <textarea id="keyFigures" name="keyFigures" placeholder="List important people associated with this concept..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="evidence">What evidence or examples were provided?</label>
+                        <textarea id="evidence" name="evidence" placeholder="What proof or examples support this concept?"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Connections -->
+            <div class="form-section">
+                <div class="section-header">Personal Connections</div>
+                
+                <div class="subsection">
+                    <h3><span class="insight-icon">3</span>Prior Knowledge Links</h3>
+                    <div class="input-group">
+                        <label for="reminds">This reminds me of:</label>
+                        <textarea id="reminds" name="reminds" placeholder="What does this concept remind you of from your past experience?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="similarConcepts">Similar concepts I've learned:</label>
+                        <textarea id="similarConcepts" name="similarConcepts" placeholder="What other concepts are similar to this one?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="understandingChange">How my understanding has changed:</label>
+                        <textarea id="understandingChange" name="understandingChange" placeholder="How has your understanding evolved through this learning?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">4</span>Personal Relevance</h3>
+                    <div class="input-group">
+                        <label for="personalImportance">Why is this important to me personally?</label>
+                        <textarea id="personalImportance" name="personalImportance" class="large-textarea" placeholder="Explain the personal significance of this concept..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="goalsRelation">How does this relate to my goals/interests?</label>
+                        <textarea id="goalsRelation" name="goalsRelation" placeholder="Connect this concept to your personal goals and interests..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="emotions">What emotions or reactions do I have to this concept?</label>
+                        <textarea id="emotions" name="emotions" placeholder="Describe your emotional response to learning this..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-World Applications -->
+            <div class="form-section">
+                <div class="section-header">Real-World Applications</div>
+                
+                <div class="subsection">
+                    <h3><span class="insight-icon">5</span>Current Examples</h3>
+                    <div class="input-group">
+                        <label for="realWorldExamples">Where do I see this concept at work in the real world?</label>
+                        <textarea id="realWorldExamples" name="realWorldExamples" class="large-textarea" placeholder="Provide specific examples from the world around you..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="currentEvents">Current events or situations that demonstrate this:</label>
+                        <textarea id="currentEvents" name="currentEvents" placeholder="What's happening in the news or world that relates to this?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="personalExperience">Examples from my own life or experience:</label>
+                        <textarea id="personalExperience" name="personalExperience" placeholder="Share examples from your own life..."></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">6</span>Professional/Academic Applications</h3>
+                    <div class="input-group">
+                        <label for="futureCareer">How might I use this in my future career?</label>
+                        <textarea id="futureCareer" name="futureCareer" class="large-textarea" placeholder="Think about your career goals and how this applies..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="problemSolving">What problems could this help solve?</label>
+                        <textarea id="problemSolving" name="problemSolving" placeholder="What kinds of problems or challenges could this concept address?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="professionalApplication">How do professionals in this field apply this concept?</label>
+                        <textarea id="professionalApplication" name="professionalApplication" placeholder="Research how experts use this concept in practice..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Critical Analysis -->
+            <div class="form-section">
+                <div class="section-header">Critical Analysis</div>
+                
+                <div class="subsection">
+                    <h3><span class="insight-icon">7</span>Strengths & Limitations</h3>
+                    <div class="input-group">
+                        <label for="strengths">What are the strengths of this concept/theory?</label>
+                        <textarea id="strengths" name="strengths" class="large-textarea" placeholder="What makes this concept valuable or powerful?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="limitations">What are its limitations or weaknesses?</label>
+                        <textarea id="limitations" name="limitations" class="large-textarea" placeholder="Where might this concept fall short or have problems?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="unansweredQuestions">What questions remain unanswered?</label>
+                        <textarea id="unansweredQuestions" name="unansweredQuestions" placeholder="What still needs to be figured out or researched?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">8</span>Different Perspectives</h3>
+                    <div class="input-group">
+                        <label for="alternatives">Are there alternative viewpoints or competing theories?</label>
+                        <textarea id="alternatives" name="alternatives" placeholder="What other ways of thinking about this exist?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="culturalPerspectives">How might different cultures/groups view this differently?</label>
+                        <textarea id="culturalPerspectives" name="culturalPerspectives" placeholder="Consider diverse cultural or demographic perspectives..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="biases">What biases might influence how this is understood?</label>
+                        <textarea id="biases" name="biases" placeholder="What assumptions or biases might affect interpretation?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">9</span>Evaluation</h3>
+                    <div class="input-group">
+                        <label for="agreement">Do I agree with this concept? Why or why not?</label>
+                        <textarea id="agreement" name="agreement" class="large-textarea" placeholder="Share your critical opinion and reasoning..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="evidence">What evidence would strengthen or weaken this theory?</label>
+                        <textarea id="evidenceEval" name="evidenceEval" placeholder="What kind of proof would make this stronger or weaker?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="reliability">How reliable/valid do I think this concept is?</label>
+                        <textarea id="reliability" name="reliability" placeholder="Assess the trustworthiness and accuracy of this concept..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation & Future Learning -->
+            <div class="form-section">
+                <div class="section-header">Implementation & Future Learning</div>
+                
+                <div class="subsection">
+                    <h3><span class="insight-icon">10</span>Action Planning</h3>
+                    <div class="input-group">
+                        <label for="practiceApplication">How can I practice or apply this concept?</label>
+                        <textarea id="practiceApplication" name="practiceApplication" class="large-textarea" placeholder="Plan specific ways to practice using this concept..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="specificActions">What specific actions will I take?</label>
+                        <textarea id="specificActions" name="specificActions" placeholder="List concrete steps you will take..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="measurement">How will I measure my understanding/application?</label>
+                        <textarea id="measurement" name="measurement" placeholder="How will you know if you're successfully applying this?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">11</span>Further Exploration</h3>
+                    <div class="input-group">
+                        <label for="remainingQuestions">What questions do I still have?</label>
+                        <textarea id="remainingQuestions" name="remainingQuestions" placeholder="What are you still curious about?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="researchMore">What would I like to research more?</label>
+                        <textarea id="researchMore" name="researchMore" placeholder="What topics deserve deeper investigation?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="futureConnection">How does this connect to what we'll learn next?</label>
+                        <textarea id="futureConnection" name="futureConnection" placeholder="How might this build into future learning?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">12</span>Teaching Others</h3>
+                    <div class="input-group">
+                        <label for="explainOthers">How would I explain this to someone else?</label>
+                        <textarea id="explainOthers" name="explainOthers" class="large-textarea" placeholder="Practice explaining this concept in simple terms..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="examples">What examples would I use?</label>
+                        <textarea id="examples" name="examples" placeholder="Choose the best examples to help others understand..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="confusing">What might be confusing about this concept?</label>
+                        <textarea id="confusing" name="confusing" placeholder="Anticipate what others might find difficult..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reflection Summary -->
+            <div class="form-section">
+                <div class="section-header">Reflection Summary</div>
+                
+                <div class="highlight-box">
+                    <div class="subsection">
+                        <h3><span class="insight-icon">13</span>Key Insights</h3>
+                        <div class="input-group">
+                            <label for="importantInsight">The most important insight I gained:</label>
+                            <textarea id="importantInsight" name="importantInsight" class="large-textarea" placeholder="What was your biggest 'aha' moment?"></textarea>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="thinkingChange">How my thinking has changed:</label>
+                            <textarea id="thinkingChange" name="thinkingChange" placeholder="How has this altered your perspective?"></textarea>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="unexpectedConnections">Unexpected connections I discovered:</label>
+                            <textarea id="unexpectedConnections" name="unexpectedConnections" placeholder="What surprising links did you find?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">14</span>Personal Growth</h3>
+                    <div class="input-group">
+                        <label for="skillsDeveloped">Skills this helped me develop:</label>
+                        <textarea id="skillsDeveloped" name="skillsDeveloped" placeholder="What abilities did you strengthen through this?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="learningGoals">How this contributes to my learning goals:</label>
+                        <textarea id="learningGoals" name="learningGoals" placeholder="How does this fit your educational objectives?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="learningProcess">What I learned about my own learning process:</label>
+                        <textarea id="learningProcess" name="learningProcess" placeholder="What did you discover about how you learn best?"></textarea>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3><span class="insight-icon">15</span>Future Impact</h3>
+                    <div class="input-group">
+                        <label for="futureLearning">How will this influence my future learning?</label>
+                        <textarea id="futureLearning" name="futureLearning" placeholder="How will this change your approach to future studies?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="newGoals">What new goals or interests has this sparked?</label>
+                        <textarea id="newGoals" name="newGoals" placeholder="What new directions are you excited to explore?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="buildKnowledge">How might I build on this knowledge?</label>
+                        <textarea id="buildKnowledge" name="buildKnowledge" placeholder="What's your plan for extending this learning?"></textarea>
+                    </div>
+                </div>
+
+                <div class="rating-group">
+                    <div class="rating-item">
+                        <label>Understanding Level (1-5):</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="understanding1" name="understanding" value="1">
+                            <label for="understanding1">1</label>
+                            <input type="radio" id="understanding2" name="understanding" value="2">
+                            <label for="understanding2">2</label>
+                            <input type="radio" id="understanding3" name="understanding" value="3">
+                            <label for="understanding3">3</label>
+                            <input type="radio" id="understanding4" name="understanding" value="4">
+                            <label for="understanding4">4</label>
+                            <input type="radio" id="understanding5" name="understanding" value="5">
+                            <label for="understanding5">5</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-item">
+                        <label>Application Confidence (1-5):</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="application1" name="application" value="1">
+                            <label for="application1">1</label>
+                            <input type="radio" id="application2" name="application" value="2">
+                            <label for="application2">2</label>
+                            <input type="radio" id="application3" name="application" value="3">
+                            <label for="application3">3</label>
+                            <input type="radio" id="application4" name="application" value="4">
+                            <label for="application4">4</label>
+                            <input type="radio" id="application5" name="application" value="5">
+                            <label for="application5">5</label>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-item">
+                        <label>Personal Relevance (1-5):</label>
+                        <div class="rating-scale">
+                            <input type="radio" id="relevance1" name="relevance" value="1">
+                            <label for="relevance1">1</label>
+                            <input type="radio" id="relevance2" name="relevance" value="2">
+                            <label for="relevance2">2</label>
+                            <input type="radio" id="relevance3" name="relevance" value="3">
+                            <label for="relevance3">3</label>
+                            <input type="radio" id="relevance4" name="relevance" value="4">
+                            <label for="relevance4">4</label>
+                            <input type="radio" id="relevance5" name="relevance" value="5">
+                            <label for="relevance5">5</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="keyTakeaway">One key takeaway to remember:</label>
+                    <textarea id="keyTakeaway" name="keyTakeaway" class="large-textarea" placeholder="What's the one thing you want to remember most?"></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-success" onclick="saveData()">Save Progress</button>
+                <button type="button" class="btn btn-primary" onclick="exportToGoogle()">Export to Google Docs</button>
+                <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="exportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Export to Google Docs</h3>
+                <p>Copy the formatted text below and paste it into a new Google Doc:</p>
+            </div>
+            <textarea class="export-text" id="exportText" readonly></textarea>
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const form = document.getElementById('reflectiveForm');
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            const filledInputs = Array.from(inputs).filter(input => input.value.trim() !== '');
+            const progress = (filledInputs.length / inputs.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function saveData() {
+            const formData = new FormData(document.getElementById('reflectiveForm'));
+            const data = Object.fromEntries(formData.entries());
+            localStorage.setItem('reflectiveApplicationData', JSON.stringify(data));
+            alert('Progress saved successfully! Your work is automatically saved every 30 seconds.');
+        }
+
+        function loadData() {
+            const savedData = localStorage.getItem('reflectiveApplicationData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                for (const [key, value] of Object.entries(data)) {
+                    const field = document.querySelector(`[name="${key}"]`);
+                    if (field) {
+                        field.value = value;
+                        if (field.type === 'radio') {
+                            const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
+                            if (radio) radio.checked = true;
+                        }
+                    }
+                }
+                updateProgress();
+            }
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                document.getElementById('reflectiveForm').reset();
+                localStorage.removeItem('reflectiveApplicationData');
+                updateProgress();
+            }
+        }
+
+        function exportToGoogle() {
+            const formData = new FormData(document.getElementById('reflectiveForm'));
+            const data = Object.fromEntries(formData.entries());
+
+            const exportText = `
+REFLECTIVE APPLICATION TEMPLATE - EVANGEL UNIVERSITY
+
+Student: ${data.studentName || '[Name]'}
+Date: ${data.date || '[Date]'}
+Subject/Course: ${data.subject || '[Course]'}
+Concept/Topic: ${data.concept || '[Concept]'}
+
+═══════════════════════════════════════════════════════
+
+UNDERSTANDING THE CONCEPT
+
+Core Knowledge:
+━━━━━━━━━━━━━━
+Define the concept in your own words:
+${data.definition || '[Your response]'}
+
+Key principles or components:
+${data.keyPrinciples || '[Your response]'}
+
+How does this fit into the broader subject area?
+${data.broaderContext || '[Your response]'}
+
+Learning Source:
+━━━━━━━━━━━━━━━
+Where did I encounter this?
+${data.learningSource || '[Your response]'}
+
+Key theorists/researchers mentioned:
+${data.keyFigures || '[Your response]'}
+
+What evidence or examples were provided?
+${data.evidence || '[Your response]'}
+
+═══════════════════════════════════════════════════════
+
+PERSONAL CONNECTIONS
+
+Prior Knowledge Links:
+━━━━━━━━━━━━━━━━━━━━━━
+This reminds me of:
+${data.reminds || '[Your response]'}
+
+Similar concepts I've learned:
+${data.similarConcepts || '[Your response]'}
+
+How my understanding has changed:
+${data.understandingChange || '[Your response]'}
+
+Personal Relevance:
+━━━━━━━━━━━━━━━━━━━
+Why is this important to me personally?
+${data.personalImportance || '[Your response]'}
+
+How does this relate to my goals/interests?
+${data.goalsRelation || '[Your response]'}
+
+What emotions or reactions do I have to this concept?
+${data.emotions || '[Your response]'}
+
+═══════════════════════════════════════════════════════
+
+REAL-WORLD APPLICATIONS
+
+Current Examples:
+━━━━━━━━━━━━━━━━━
+Where do I see this concept at work in the real world?
+${data.realWorldExamples || '[Your response]'}
+
+Current events or situations that demonstrate this:
+${data.currentEvents || '[Your response]'}
+
+Examples from my own life or experience:
+${data.personalExperience || '[Your response]'}
+
+Professional/Academic Applications:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+How might I use this in my future career?
+${data.futureCareer || '[Your response]'}
+
+What problems could this help solve?
+${data.problemSolving || '[Your response]'}
+
+How do professionals in this field apply this concept?
+${data.professionalApplication || '[Your response]'}
+
+═══════════════════════════════════════════════════════
+
+CRITICAL ANALYSIS
+
+Strengths & Limitations:
+━━━━━━━━━━━━━━━━━━━━━━━
+What are the strengths of this concept/theory?
+${data.strengths || '[Your response]'}
+
+What are its limitations or weaknesses?
+${data.limitations || '[Your response]'}
+
+What questions remain unanswered?
+${data.unansweredQuestions || '[Your response]'}
+
+Different Perspectives:
+━━━━━━━━━━━━━━━━━━━━━━
+Are there alternative viewpoints or competing theories?
+${data.alternatives || '[Your response]'}
+
+How might different cultures/groups view this differently?
+${data.culturalPerspectives || '[Your response]'}
+
+What biases might influence how this is understood?
+${data.biases || '[Your response]'}
+
+Evaluation:
+━━━━━━━━━━━
+Do I agree with this concept? Why or why not?
+${data.agreement || '[Your response]'}
+
+What evidence would strengthen or weaken this theory?
+${data.evidenceEval || '[Your response]'}
+
+How reliable/valid do I think this concept is?
+${data.reliability || '[Your response]'}
+
+═══════════════════════════════════════════════════════
+
+IMPLEMENTATION & FUTURE LEARNING
+
+Action Planning:
+━━━━━━━━━━━━━━━━
+How can I practice or apply this concept?
+${data.practiceApplication || '[Your response]'}
+
+What specific actions will I take?
+${data.specificActions || '[Your response]'}
+
+How will I measure my understanding/application?
+${data.measurement || '[Your response]'}
+
+Further Exploration:
+━━━━━━━━━━━━━━━━━━━━
+What questions do I still have?
+${data.remainingQuestions || '[Your response]'}
+
+What would I like to research more?
+${data.researchMore || '[Your response]'}
+
+How does this connect to what we'll learn next?
+${data.futureConnection || '[Your response]'}
+
+Teaching Others:
+━━━━━━━━━━━━━━━━
+How would I explain this to someone else?
+${data.explainOthers || '[Your response]'}
+
+What examples would I use?
+${data.examples || '[Your response]'}
+
+What might be confusing about this concept?
+${data.confusing || '[Your response]'}
+
+═══════════════════════════════════════════════════════
+
+REFLECTION SUMMARY
+
+Key Insights:
+━━━━━━━━━━━━━
+★ The most important insight I gained:
+${data.importantInsight || '[Your response]'}
+
+★ How my thinking has changed:
+${data.thinkingChange || '[Your response]'}
+
+★ Unexpected connections I discovered:
+${data.unexpectedConnections || '[Your response]'}
+
+Personal Growth:
+━━━━━━━━━━━━━━━━
+Skills this helped me develop:
+${data.skillsDeveloped || '[Your response]'}
+
+How this contributes to my learning goals:
+${data.learningGoals || '[Your response]'}
+
+What I learned about my own learning process:
+${data.learningProcess || '[Your response]'}
+
+Future Impact:
+━━━━━━━━━━━━━━
+How will this influence my future learning?
+${data.futureLearning || '[Your response]'}
+
+What new goals or interests has this sparked?
+${data.newGoals || '[Your response]'}
+
+How might I build on this knowledge?
+${data.buildKnowledge || '[Your response]'}
+
+═══════════════════════════════════════════════════════
+
+ASSESSMENT RATINGS
+
+Understanding Level: ${data.understanding || '[Not rated]'}/5
+Application Confidence: ${data.application || '[Not rated]'}/5  
+Personal Relevance: ${data.relevance || '[Not rated]'}/5
+
+★ ONE KEY TAKEAWAY TO REMEMBER:
+${data.keyTakeaway || '[Your key insight]'}
+
+═══════════════════════════════════════════════════════
+Generated by Evangel University Reflective Application Template
+Date: ${new Date().toLocaleDateString()}
+            `.trim();
+
+            document.getElementById('exportText').value = exportText;
+            document.getElementById('exportModal').style.display = 'flex';
+        }
+
+        function copyToClipboard() {
+            const exportText = document.getElementById('exportText');
+            exportText.select();
+            document.execCommand('copy');
+            alert('Content copied to clipboard! You can now paste it into Google Docs.');
+        }
+
+        function closeModal() {
+            document.getElementById('exportModal').style.display = 'none';
+        }
+
+        // Event listeners
+        window.addEventListener('load', loadData);
+        
+        // Auto-update progress as user types
+        document.getElementById('reflectiveForm').addEventListener('input', updateProgress);
+        document.getElementById('reflectiveForm').addEventListener('change', updateProgress);
+        
+        // Auto-save every 30 seconds
+        setInterval(saveData, 30000);
+        
+        // Initial progress update
+        updateProgress();
+    </script>
+</body>
+</html>
