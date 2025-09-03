@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evangel University Study Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2d5aa0 0%, #1e3c72 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d5aa0 0%, #1e3c72 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .eu-logo {
+            font-weight: bold;
+            font-size: 1.2em;
+            border: 3px solid white;
+            padding: 15px 30px;
+            border-radius: 40px;
+            display: inline-block;
+            letter-spacing: 2px;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .intro h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .template-card {
+            background: #f8f9fc;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(45, 90, 160, 0.2);
+            border-color: #2d5aa0;
+        }
+
+        .template-card h3 {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .template-card p {
+            color: #6c757d;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .template-card .btn {
+            background: linear-gradient(135deg, #2d5aa0 0%, #1e3c72 100%);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .template-card .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+        }
+
+        .features {
+            background: #e8f4fd;
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 15px;
+            border-left: 5px solid #2d5aa0;
+        }
+
+        .features h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #495057;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .templates-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Study Templates</h1>
+            <div class="subtitle">Interactive Learning Tools for Academic Success</div>
+            <div class="eu-logo">EVANGEL UNIVERSITY</div>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>Enhance Your Learning Experience</h2>
+                <p>Welcome to our collection of interactive study templates designed to help you maximize your learning potential. These research-based tools will guide you through effective study strategies, from active reading to reflective learning and comprehensive note-taking.</p>
+            </div>
+
+            <div class="templates-grid">
+                <div class="template-card">
+                    <h3>📖 Active Reading</h3>
+                    <p>Transform passive reading into active engagement. This template guides you through pre-reading, during-reading, and post-reading strategies to maximize comprehension and retention.</p>
+                    <a href="templates/active-reading.html" class="btn">Start Active Reading</a>
+                </div>
+
+                <div class="template-card">
+                    <h3>🤔 Reflective Application</h3>
+                    <p>Connect learning to life and purpose. This comprehensive reflection tool helps you analyze concepts, make personal connections, and plan real-world applications of your knowledge.</p>
+                    <a href="templates/reflective-application.html" class="btn">Begin Reflection</a>
+                </div>
+
+                <div class="template-card">
+                    <h3>📝 Interactive Notes</h3>
+                    <p>Master multiple note-taking methods including Cornell Notes, outlining, mind mapping, and charting. Features active learning elements and comprehensive review planning.</p>
+                    <a href="templates/note-taking.html" class="btn">Take Notes</a>
+                </div>
+            </div>
+
+            <div class="features">
+                <h3>🚀 Key Features</h3>
+                <ul>
+                    <li><strong>Auto-Save Functionality:</strong> Never lose your work with automatic saving every 30 seconds</li>
+                    <li><strong>Progress Tracking:</strong> Visual progress indicators show your completion status</li>
+                    <li><strong>Export to Google Docs:</strong> Easily export your work to share with instructors</li>
+                    <li><strong>Mobile Responsive:</strong> Work seamlessly on any device, anywhere</li>
+                    <li><strong>No Login Required:</strong> Start working immediately with local storage</li>
+                    <li><strong>Research-Based:</strong> Built on proven educational methodologies</li>
+                </ul>
+            </div>
+
+            <div class="intro">
+                <h2>How to Use These Templates</h2>
+                <p><strong>1. Choose a Template:</strong> Select the study method that best fits your current learning task.<br>
+                <strong>2. Work at Your Pace:</strong> Fill out sections as you study - your progress saves automatically.<br>
+                <strong>3. Export Your Work:</strong> Copy your completed template to Google Docs for submission or review.<br>
+                <strong>4. Return Anytime:</strong> Your work is saved locally and available whenever you return.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Evangel University Study Templates | Empowering Student Success</p>
+            <p><a href="docs/user-guide.html" style="color: #2d5aa0;">User Guide</a> | 
+               <a href="https://github.com/yourusername/evangel-study-templates" style="color: #2d5aa0;">GitHub Repository</a></p>
+        </div>
+    </div>
+</body>
+</html>
