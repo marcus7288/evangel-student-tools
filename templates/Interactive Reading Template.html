@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Reading Template - Evangel University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .eu-logo {
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px 25px;
+            margin: -30px -30px 25px -30px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-row > div {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        input[type="text"], input[type="date"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .large-textarea {
+            min-height: 120px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .rating-scale input[type="radio"] {
+            width: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .export-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .export-text {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .input-row {
+                flex-direction: column;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Active Reading Template</h1>
+            <div class="subtitle">Enhance Your Reading Comprehension</div>
+            <div class="eu-logo">EVANGEL UNIVERSITY</div>
+        </div>
+
+        <form id="activeReadingForm">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <div class="section-header">Student Information</div>
+                <div class="input-row">
+                    <div>
+                        <label for="studentName">Student Name:</label>
+                        <input type="text" id="studentName" name="studentName" required>
+                    </div>
+                    <div>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div>
+                        <label for="readingMaterial">Reading Material:</label>
+                        <input type="text" id="readingMaterial" name="readingMaterial" required>
+                    </div>
+                    <div>
+                        <label for="sourceAuthor">Source/Author:</label>
+                        <input type="text" id="sourceAuthor" name="sourceAuthor">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pre-Reading Preparation -->
+            <div class="form-section">
+                <div class="section-header">Pre-Reading Preparation</div>
+                
+                <div class="input-group">
+                    <label for="purpose">Why am I reading this?</label>
+                    <textarea id="purpose" name="purpose" placeholder="Enter your reading purpose..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="goals">What do I hope to learn?</label>
+                    <textarea id="goals" name="goals" placeholder="Enter your learning goals..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="courseConnection">How does this connect to my course/studies?</label>
+                    <textarea id="courseConnection" name="courseConnection" placeholder="Describe the connection to your studies..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="predictions">I predict this reading will cover:</label>
+                    <textarea id="predictions" name="predictions" placeholder="Enter your predictions about the content..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="preQuestions">Questions I have before reading:</label>
+                    <textarea id="preQuestions" name="preQuestions" placeholder="What questions do you have before starting?"></textarea>
+                </div>
+            </div>
+
+            <!-- During Reading -->
+            <div class="form-section">
+                <div class="section-header">During Reading</div>
+                
+                <label>Active Engagement Strategies (check all that apply):</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="highlighting" name="strategies" value="highlighting">
+                        <label for="highlighting">Highlighting key concepts</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="marginNotes" name="strategies" value="marginNotes">
+                        <label for="marginNotes">Making margin notes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="asking" name="strategies" value="asking">
+                        <label for="asking">Asking questions</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="connecting" name="strategies" value="connecting">
+                        <label for="connecting">Making connections</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="summarizing" name="strategies" value="summarizing">
+                        <label for="summarizing">Summarizing sections</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="vocabulary" name="strategies" value="vocabulary">
+                        <label for="vocabulary">Looking up unfamiliar terms</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Key Concepts & Main Ideas:</label>
+                    <div class="table-container">
+                        <table id="conceptsTable">
+                            <thead>
+                                <tr>
+                                    <th>Section/Chapter</th>
+                                    <th>Main Idea</th>
+                                    <th>Supporting Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="conceptsBody">
+                                <tr>
+                                    <td><input type="text" name="section1" placeholder="Section name..."></td>
+                                    <td><textarea name="mainIdea1" placeholder="Main idea..."></textarea></td>
+                                    <td><textarea name="details1" placeholder="Supporting details..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="section2" placeholder="Section name..."></td>
+                                    <td><textarea name="mainIdea2" placeholder="Main idea..."></textarea></td>
+                                    <td><textarea name="details2" placeholder="Supporting details..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="section3" placeholder="Section name..."></td>
+                                    <td><textarea name="mainIdea3" placeholder="Main idea..."></textarea></td>
+                                    <td><textarea name="details3" placeholder="Supporting details..."></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addConceptRow()">Add Another Section</button>
+                </div>
+
+                <div class="input-group">
+                    <label>New Vocabulary & Terms:</label>
+                    <div class="table-container">
+                        <table id="vocabTable">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Definition</th>
+                                    <th>Context/Example</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vocabBody">
+                                <tr>
+                                    <td><input type="text" name="term1" placeholder="Term..."></td>
+                                    <td><textarea name="definition1" placeholder="Definition..."></textarea></td>
+                                    <td><textarea name="context1" placeholder="Context/Example..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="term2" placeholder="Term..."></td>
+                                    <td><textarea name="definition2" placeholder="Definition..."></textarea></td>
+                                    <td><textarea name="context2" placeholder="Context/Example..."></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addVocabRow()">Add Another Term</button>
+                </div>
+
+                <div class="input-group">
+                    <label for="duringQuestions">Questions that arose while reading:</label>
+                    <textarea id="duringQuestions" name="duringQuestions" class="large-textarea" placeholder="What questions came up during reading?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="clarifications">Points that need clarification:</label>
+                    <textarea id="clarifications" name="clarifications" placeholder="What needs to be clarified?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="surprises">Contradictions or surprising information:</label>
+                    <textarea id="surprises" name="surprises" placeholder="What surprised you or seemed contradictory?"></textarea>
+                </div>
+            </div>
+
+            <!-- Post-Reading Reflection -->
+            <div class="form-section">
+                <div class="section-header">Post-Reading Reflection</div>
+                
+                <div class="input-group">
+                    <label for="summary">In my own words, this reading was about:</label>
+                    <textarea id="summary" name="summary" class="large-textarea" placeholder="Summarize the reading in your own words..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="importantPoints">The most important points were:</label>
+                    <textarea id="importantPoints" name="importantPoints" class="large-textarea" placeholder="List the most important points..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="mainArgument">The author's main argument/thesis:</label>
+                    <textarea id="mainArgument" name="mainArgument" placeholder="What was the author's main argument?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="connections">This connects to previous learning by:</label>
+                    <textarea id="connections" name="connections" placeholder="How does this connect to what you already know?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="applications">Real-world applications:</label>
+                    <textarea id="applications" name="applications" placeholder="How can this be applied in the real world?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="examRelevance">How this might appear on an exam:</label>
+                    <textarea id="examRelevance" name="examRelevance" placeholder="How might this content be tested?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="surprised">What surprised me:</label>
+                    <textarea id="surprised" name="surprised" placeholder="What was surprising about this reading?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="opinion">What I agree/disagree with:</label>
+                    <textarea id="opinion" name="opinion" placeholder="Share your opinions about the content..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="learnMore">What I want to learn more about:</label>
+                    <textarea id="learnMore" name="learnMore" placeholder="What topics would you like to explore further?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Follow-Up Actions (check all that apply):</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="reviewNotes" name="followUp" value="reviewNotes">
+                            <label for="reviewNotes">Review notes</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="research" name="followUp" value="research">
+                            <label for="research">Research unclear concepts</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="discuss" name="followUp" value="discuss">
+                            <label for="discuss">Discuss with classmates/teacher</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="connectReadings" name="followUp" value="connectReadings">
+                            <label for="connectReadings">Connect to other readings</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="practice" name="followUp" value="practice">
+                            <label for="practice">Practice applying concepts</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="otherActions">Other actions:</label>
+                        <input type="text" id="otherActions" name="otherActions" placeholder="Any other follow-up actions?">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary for Review -->
+            <div class="form-section">
+                <div class="section-header">Summary for Review</div>
+                
+                <div class="input-group">
+                    <label for="oneSentence">One-sentence summary:</label>
+                    <textarea id="oneSentence" name="oneSentence" placeholder="Summarize the entire reading in one sentence..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Three key takeaways:</label>
+                    <input type="text" name="takeaway1" placeholder="1. First takeaway..." style="margin-bottom: 10px;">
+                    <input type="text" name="takeaway2" placeholder="2. Second takeaway..." style="margin-bottom: 10px;">
+                    <input type="text" name="takeaway3" placeholder="3. Third takeaway...">
+                </div>
+
+                <div class="input-group">
+                    <label>Rating my understanding:</label>
+                    <div class="rating-scale">
+                        <input type="radio" id="rating1" name="understanding" value="1">
+                        <label for="rating1">1</label>
+                        <input type="radio" id="rating2" name="understanding" value="2">
+                        <label for="rating2">2</label>
+                        <input type="radio" id="rating3" name="understanding" value="3">
+                        <label for="rating3">3</label>
+                        <input type="radio" id="rating4" name="understanding" value="4">
+                        <label for="rating4">4</label>
+                        <input type="radio" id="rating5" name="understanding" value="5">
+                        <label for="rating5">5</label>
+                        <span style="margin-left: 20px;">(1 = Poor, 5 = Excellent)</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="ratingReason">Why this rating?</label>
+                    <textarea id="ratingReason" name="ratingReason" placeholder="Explain why you gave yourself this rating..."></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="saveData()">Save Progress</button>
+                <button type="button" class="btn btn-primary" onclick="exportToGoogle()">Export to Google Docs</button>
+                <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="exportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Export to Google Docs</h3>
+                <p>Copy the text below and paste it into a new Google Doc:</p>
+            </div>
+            <textarea class="export-text" id="exportText" readonly></textarea>
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let conceptRowCount = 3;
+        let vocabRowCount = 2;
+
+        function addConceptRow() {
+            conceptRowCount++;
+            const tbody = document.getElementById('conceptsBody');
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td><input type="text" name="section${conceptRowCount}" placeholder="Section name..."></td>
+                <td><textarea name="mainIdea${conceptRowCount}" placeholder="Main idea..."></textarea></td>
+                <td><textarea name="details${conceptRowCount}" placeholder="Supporting details..."></textarea></td>
+            `;
+        }
+
+        function addVocabRow() {
+            vocabRowCount++;
+            const tbody = document.getElementById('vocabBody');
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td><input type="text" name="term${vocabRowCount}" placeholder="Term..."></td>
+                <td><textarea name="definition${vocabRowCount}" placeholder="Definition..."></textarea></td>
+                <td><textarea name="context${vocabRowCount}" placeholder="Context/Example..."></textarea></td>
+            `;
+        }
+
+        function saveData() {
+            const formData = new FormData(document.getElementById('activeReadingForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Handle checkboxes
+            const strategies = [];
+            const followUp = [];
+            document.querySelectorAll('input[name="strategies"]:checked').forEach(cb => strategies.push(cb.value));
+            document.querySelectorAll('input[name="followUp"]:checked').forEach(cb => followUp.push(cb.value));
+            
+            data.strategies = strategies;
+            data.followUp = followUp;
+            
+            localStorage.setItem('activeReadingData', JSON.stringify(data));
+            alert('Progress saved successfully!');
+        }
+
+        function loadData() {
+            const savedData = localStorage.getItem('activeReadingData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                
+                // Fill form fields
+                for (const [key, value] of Object.entries(data)) {
+                    if (key === 'strategies' || key === 'followUp') {
+                        value.forEach(val => {
+                            const checkbox = document.querySelector(`input[name="${key}"][value="${val}"]`);
+                            if (checkbox) checkbox.checked = true;
+                        });
+                    } else if (key === 'understanding') {
+                        const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
+                        if (radio) radio.checked = true;
+                    } else {
+                        const field = document.querySelector(`[name="${key}"]`);
+                        if (field) field.value = value;
+                    }
+                }
+            }
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                document.getElementById('activeReadingForm').reset();
+                localStorage.removeItem('activeReadingData');
+            }
+        }
+
+        function exportToGoogle() {
+            const formData = new FormData(document.getElementById('activeReadingForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Get checked strategies
+            const strategies = [];
+            document.querySelectorAll('input[name="strategies"]:checked').forEach(cb => {
+                strategies.push(cb.nextElementSibling.textContent);
+            });
+            
+            // Get checked follow-up actions
+            const followUp = [];
+            document.querySelectorAll('input[name="followUp"]:checked').forEach(cb => {
+                followUp.push(cb.nextElementSibling.textContent);
+            });
+
+            const exportText = `
+ACTIVE READING TEMPLATE - EVANGEL UNIVERSITY
+Student: ${data.studentName || '[Name]'}
+Date: ${data.date || '[Date]'}
+Reading Material: ${data.readingMaterial || '[Title]'}
+Source/Author: ${data.sourceAuthor || '[Author]'}
+
+PRE-READING PREPARATION
+
+Purpose & Goals:
+Why am I reading this?
+${data.purpose || '[Your response]'}
+
+What do I hope to learn?
+${data.goals || '[Your response]'}
+
+How does this connect to my course/studies?
+${data.courseConnection || '[Your response]'}
+
+Preview & Predictions:
+I predict this reading will cover:
+${data.predictions || '[Your response]'}
+
+Questions I have before reading:
+${data.preQuestions || '[Your response]'}
+
+DURING READING
+
+Active Engagement Strategies Used:
+${strategies.length > 0 ? strategies.map(s => `✓ ${s}`).join('\n') : '[None selected]'}
+
+Key Concepts & Main Ideas:
+${Array.from(document.querySelectorAll('#conceptsTable tbody tr')).map((row, i) => {
+    const cells = row.querySelectorAll('input, textarea');
+    if (cells[0].value || cells[1].value || cells[2].value) {
+        return `Section: ${cells[0].value || '[Section]'}
+Main Idea: ${cells[1].value || '[Main Idea]'}
+Supporting Details: ${cells[2].value || '[Details]'}`;
+    }
+    return '';
+}).filter(s => s).join('\n\n')}
+
+New Vocabulary & Terms:
+${Array.from(document.querySelectorAll('#vocabTable tbody tr')).map((row, i) => {
+    const cells = row.querySelectorAll('input, textarea');
+    if (cells[0].value || cells[1].value || cells[2].value) {
+        return `Term: ${cells[0].value || '[Term]'}
+Definition: ${cells[1].value || '[Definition]'}
+Context/Example: ${cells[2].value || '[Context]'}`;
+    }
+    return '';
+}).filter(s => s).join('\n\n')}
+
+Questions & Confusions:
+Questions that arose while reading:
+${data.duringQuestions || '[Your response]'}
+
+Points that need clarification:
+${data.clarifications || '[Your response]'}
+
+Contradictions or surprising information:
+${data.surprises || '[Your response]'}
+
+POST-READING REFLECTION
+
+Comprehension Check:
+In my own words, this reading was about:
+${data.summary || '[Your response]'}
+
+The most important points were:
+${data.importantPoints || '[Your response]'}
+
+The author's main argument/thesis:
+${data.mainArgument || '[Your response]'}
+
+Connections & Applications:
+This connects to previous learning by:
+${data.connections || '[Your response]'}
+
+Real-world applications:
+${data.applications || '[Your response]'}
+
+How this might appear on an exam:
+${data.examRelevance || '[Your response]'}
+
+Personal Response:
+What surprised me:
+${data.surprised || '[Your response]'}
+
+What I agree/disagree with:
+${data.opinion || '[Your response]'}
+
+What I want to learn more about:
+${data.learnMore || '[Your response]'}
+
+Follow-Up Actions:
+${followUp.length > 0 ? followUp.map(f => `✓ ${f}`).join('\n') : '[None selected]'}
+${data.otherActions ? `Other: ${data.otherActions}` : ''}
+
+SUMMARY FOR REVIEW
+
+One-sentence summary:
+${data.oneSentence || '[Your response]'}
+
+Three key takeaways:
+1. ${data.takeaway1 || '[First takeaway]'}
+2. ${data.takeaway2 || '[Second takeaway]'}
+3. ${data.takeaway3 || '[Third takeaway]'}
+
+Understanding Rating: ${data.understanding || '[Not rated]'}/5
+Why this rating: ${data.ratingReason || '[Your explanation]'}
+
+Generated by Evangel University Active Reading Template
+            `.trim();
+
+            document.getElementById('exportText').value = exportText;
+            document.getElementById('exportModal').style.display = 'flex';
+        }
+
+        function copyToClipboard() {
+            const exportText = document.getElementById('exportText');
+            exportText.select();
+            document.execCommand('copy');
+            alert('Content copied to clipboard! You can now paste it into Google Docs.');
+        }
+
+        function closeModal() {
+            document.getElementById('exportModal').style.display = 'none';
+        }
+
+        // Load saved data on page load
+        window.addEventListener('load', loadData);
+
+        // Auto-update progress as user types
+        document.getElementById('activeReadingForm').addEventListener('input', updateProgress);
+        document.getElementById('activeReadingForm').addEventListener('change', updateProgress);
+
+        // Auto-save every 30 seconds
+        setInterval(saveData, 30000);
+
+        // Initial progress update
+        updateProgress();
+    </script>
+</body>
+</html>
