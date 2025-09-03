@@ -3,7 +3,7 @@
 ## Getting Started
 
 ### Quick Start
-1. Visit [Evangel Study Templates](https://yourusername.github.io/evangel-study-templates/)
+1. Visit [Evangel Study Tools](https://marcus7288.github.io/evangel-student-tools/)
 2. Choose a template that matches your study activity
 3. Start filling out the sections - your work saves automatically
 4. Export to Google Docs when ready to submit or review
@@ -36,7 +36,7 @@
 ### Auto-Save
 - Saves every 30 seconds automatically
 - Manual save button available
-- Works offline once page is loaded
+- Works offline once the page is loaded
 - Data stored securely in your browser
 
 ### Progress Tracking
@@ -45,8 +45,8 @@
 - Updates as you fill out sections
 
 ### Export to Google Docs
-- Creates formatted document ready for submission
-- Copy text and paste into new Google Doc
+- Creates a formatted document ready for submission
+- Copy text and paste into a new Google Doc
 - Maintains formatting and structure
 - Includes all your responses
 
@@ -59,7 +59,7 @@
 - Use specific examples when possible
 
 ### Active Reading Tips
-- Complete pre-reading section before you start
+- Complete the pre-reading section before you start
 - Use the during-reading section as you read
 - Don't rush the post-reading reflection
 
@@ -81,20 +81,20 @@
 ### Common Issues
 
 **Data Not Saving**
-- Check if browser allows localStorage
+- Check if the browser allows localStorage
 - Try refreshing the page
-- Use manual save button
+- Use the manual save button
 - Consider browser privacy settings
 
 **Export Not Working**
 - Try copying text manually
-- Check if popup blockers are active
-- Refresh page and try again
+- Check if pop-up blockers are active
+- Refreshthe  page and try again
 
 **Mobile Issues**
-- Ensure stable internet connection
+- Ensure a stable internet connection
 - Try landscape mode for better layout
-- Use latest browser version
+- Use the latest browser version
 
 ### Browser Compatibility
 - Chrome: Full support
@@ -109,10 +109,10 @@
 - Check this user guide first
 - Review template instructions
 - Contact your instructor
-- Submit issue on GitHub repository
+- Submit an issue on the GitHub repository
 
 ### Best Practices
 - Save work frequently (even with auto-save)
-- Export important work to backup
+- Export important work to a backup
 - Clear browser cache if experiencing issues
 - Use consistent devices when possible
