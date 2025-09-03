@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note-Taking Template - Evangel University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a69bd 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a69bd 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23ffffff" stroke-opacity="0.1" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50px) translateY(-50px); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .eu-logo {
+            font-weight: bold;
+            font-size: 1.15em;
+            border: 3px solid white;
+            padding: 12px 25px;
+            border-radius: 35px;
+            display: inline-block;
+            margin-top: 20px;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .eu-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .tabs-container {
+            background: #f8f9fa;
+            padding: 20px 40px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px 10px 0 0;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #6c757d;
+            min-width: 150px;
+        }
+
+        .tab.active {
+            background: white;
+            color: #1e3c72;
+            border: 2px solid #dee2e6;
+            border-bottom: 2px solid white;
+            margin-bottom: -1px;
+        }
+
+        .tab:hover:not(.active) {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .form-section {
+            padding: 35px 40px;
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px 30px;
+            margin: -35px -40px 30px -40px;
+            font-size: 1.4em;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .input-row > div {
+            flex: 1;
+        }
+
+        .input-row.thirds > div {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.05em;
+        }
+
+        input[type="text"], input[type="date"], textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.1);
+            transform: translateY(-1px);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .large-textarea {
+            min-height: 140px;
+        }
+
+        .cornell-container {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 20px;
+            margin: 20px 0;
+            min-height: 400px;
+        }
+
+        .cue-column {
+            background: #f8f9fc;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .notes-column {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .cue-column h4, .notes-column h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid #1e3c72;
+            padding-bottom: 8px;
+        }
+
+        .method-selector {
+            background: #e8f4fd;
+            border: 2px solid #2a5298;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .method-selector h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .method-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .method-option {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .method-option:hover {
+            border-color: #2a5298;
+            transform: translateY(-2px);
+        }
+
+        .method-option.selected {
+            border-color: #1e3c72;
+            background: #f8f9fc;
+            transform: translateY(-2px);
+        }
+
+        .method-option input[type="radio"] {
+            display: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: bold;
+            color: #1e3c72;
+            position: sticky;
+            top: 0;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #f8f9fc;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #2a5298;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label {
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.3);
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin: 15px 0;
+            justify-content: center;
+            background: #f8f9fc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .rating-scale input[type="radio"] {
+            width: auto;
+            transform: scale(1.4);
+            margin: 0 5px;
+        }
+
+        .rating-scale label {
+            margin: 0;
+            font-weight: normal;
+            font-size: 1.1em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #138496;
+            transform: translateY(-2px);
+        }
+
+        .export-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 700px;
+            max-height: 85%;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .modal-header h3 {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .export-text {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            height: 450px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .quick-actions {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .quick-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: #2a5298;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: #1e3c72;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .tabs-container {
+                padding: 15px 20px 0;
+            }
+
+            .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+
+            .tab {
+                min-width: 120px;
+                padding: 12px 18px;
+                font-size: 13px;
+            }
+
+            .form-section {
+                padding: 25px 20px;
+            }
+
+            .section-header {
+                margin: -25px -20px 25px -20px;
+                padding: 18px 20px;
+                font-size: 1.2em;
+            }
+
+            .input-row, .input-row.thirds {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cornell-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .method-options {
+                grid-template-columns: 1fr;
+            }
+
+            .rating-scale {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .quick-actions {
+                position: static;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                margin: 20px 0;
+            }
+        }
+
+        .highlight-tip {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 4px solid #ffd93d;
+            border-radius: 0 8px 8px 0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(255, 217, 61, 0.3);
+        }
+
+        .highlight-tip strong {
+            color: #856404;
+        }
+
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+            border-radius: 2px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Interactive Note-Taking</h1>
+                <div class="subtitle">Master Your Learning Through Effective Notes</div>
+                <div class="eu-logo">EVANGEL UNIVERSITY</div>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('basic-info')">Basic Info</button>
+                <button class="tab" onclick="showTab('pre-notes')">Pre-Notes</button>
+                <button class="tab" onclick="showTab('main-notes')">Main Notes</button>
+                <button class="tab" onclick="showTab('active-learning')">Active Learning</button>
+                <button class="tab" onclick="showTab('summary')">Summary</button>
+                <button class="tab" onclick="showTab('review')">Post-Review</button>
+            </div>
+        </div>
+
+        <form id="notesTakingForm">
+            <!-- Basic Information Tab -->
+            <div class="form-section active" id="basic-info">
+                <div class="section-header">Student & Session Information</div>
+                <div class="input-row thirds">
+                    <div>
+                        <label for="studentName">Student Name:</label>
+                        <input type="text" id="studentName" name="studentName" required>
+                    </div>
+                    <div>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div>
+                        <label for="course">Course/Subject:</label>
+                        <input type="text" id="course" name="course" required placeholder="e.g., Biology 101">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div>
+                        <label for="topicTitle">Topic/Lecture Title:</label>
+                        <input type="text" id="topicTitle" name="topicTitle" required placeholder="e.g., Cell Division Process">
+                    </div>
+                    <div>
+                        <label for="source">Source:</label>
+                        <select id="source" name="source" required>
+                            <option value="">Select source type...</option>
+                            <option value="lecture">Live Lecture</option>
+                            <option value="online-lecture">Online Lecture</option>
+                            <option value="reading">Textbook Reading</option>
+                            <option value="video">Educational Video</option>
+                            <option value="seminar">Seminar/Workshop</option>
+                            <option value="discussion">Class Discussion</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pre-Notes Setup Tab -->
+            <div class="form-section" id="pre-notes">
+                <div class="section-header">Pre-Note Setup & Objectives</div>
+                
+                <div class="highlight-tip">
+                    <strong>Tip:</strong> Setting clear learning objectives before taking notes helps you focus on the most important information and creates a framework for understanding.
+                </div>
+
+                <div class="input-group">
+                    <label for="learningObjectives">What am I supposed to learn today?</label>
+                    <textarea id="learningObjectives" name="learningObjectives" class="large-textarea" placeholder="List the key learning objectives for this session..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="keyQuestions">Key questions to focus on:</label>
+                    <textarea id="keyQuestions" name="keyQuestions" placeholder="What specific questions should guide your note-taking?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="previousConnection">How does this connect to previous lessons?</label>
+                    <textarea id="previousConnection" name="previousConnection" placeholder="Connect today's topic to what you've already learned..."></textarea>
+                </div>
+            </div>
+
+            <!-- Main Notes Tab -->
+            <div class="form-section" id="main-notes">
+                <div class="section-header">Main Notes Section</div>
+
+                <div class="method-selector">
+                    <h3>Choose Your Note-Taking Method:</h3>
+                    <div class="method-options">
+                        <div class="method-option" onclick="selectMethod('cornell')">
+                            <input type="radio" name="noteMethod" value="cornell" id="method-cornell">
+                            <strong>Cornell Notes</strong><br>
+                            <small>Cue column + detailed notes</small>
+                        </div>
+                        <div class="method-option" onclick="selectMethod('outline')">
+                            <input type="radio" name="noteMethod" value="outline" id="method-outline">
+                            <strong>Outline Format</strong><br>
+                            <small>Hierarchical structure</small>
+                        </div>
+                        <div class="method-option" onclick="selectMethod('mapping')">
+                            <input type="radio" name="noteMethod" value="mapping" id="method-mapping">
+                            <strong>Mind Mapping</strong><br>
+                            <small>Visual connections</small>
+                        </div>
+                        <div class="method-option" onclick="selectMethod('charting')">
+                            <input type="radio" name="noteMethod" value="charting" id="method-charting">
+                            <strong>Charting Method</strong><br>
+                            <small>Tables and categories</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cornell Notes Format -->
+                <div id="cornell-section" class="note-method" style="display: none;">
+                    <h3>Cornell Notes Format</h3>
+                    <div class="cornell-container">
+                        <div class="cue-column">
+                            <h4>Cue Column</h4>
+                            <p style="font-size: 0.9em; color: #6c757d; margin-bottom: 15px;">
+                                Key terms, questions, main points
+                            </p>
+                            <textarea name="cornellCues" placeholder="Write key terms, questions, and main points here..." style="height: 300px; border: none; background: transparent; resize: none;"></textarea>
+                        </div>
+                        <div class="notes-column">
+                            <h4>Note-Taking Area</h4>
+                            <p style="font-size: 0.9em; color: #6c757d; margin-bottom: 15px;">
+                                Detailed notes, examples, explanations
+                            </p>
+                            <textarea name="cornellNotes" placeholder="Write your detailed notes, examples, and explanations here..." style="height: 300px; border: none; background: transparent; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outline Format -->
+                <div id="outline-section" class="note-method" style="display: none;">
+                    <h3>Outline Format</h3>
+                    <div class="input-group">
+                        <label for="outlineNotes">Structured Outline Notes:</label>
+                        <textarea id="outlineNotes" name="outlineNotes" style="height: 400px; font-family: monospace;" placeholder="I. Main Topic
+   A. Subtopic
+      1. Detail
+      2. Detail
+   B. Subtopic
+      1. Detail
+      2. Detail
+
+II. Second Main Topic
+   A. Subtopic
+   B. Subtopic"></textarea>
+                    </div>
+                </div>
+
+                <!-- Mind Mapping -->
+                <div id="mapping-section" class="note-method" style="display: none;">
+                    <h3>Mind Mapping / Visual Notes</h3>
+                    <div class="input-group">
+                        <label for="centralConcept">Central Concept:</label>
+                        <input type="text" id="centralConcept" name="centralConcept" placeholder="Main topic or concept">
+                    </div>
+                    <div class="input-group">
+                        <label for="mappingNotes">Visual/Mapping Notes:</label>
+                        <textarea id="mappingNotes" name="mappingNotes" style="height: 350px;" placeholder="Describe your mind map structure:
+
+Central Concept: [Main Topic]
+├── Branch 1: [Subtopic]
+│   ├── Detail A
+│   └── Detail B
+├── Branch 2: [Subtopic]
+│   ├── Detail C
+│   └── Detail D
+└── Branch 3: [Subtopic]
+    ├── Detail E
+    └── Detail F
+
+Or describe visual connections and relationships..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Charting Method -->
+                <div id="charting-section" class="note-method" style="display: none;">
+                    <h3>Charting Method</h3>
+                    <div class="table-container">
+                        <table id="chartingTable">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Information</th>
+                                    <th>Examples</th>
+                                    <th>Importance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="chartingBody">
+                                <tr>
+                                    <td><input type="text" name="category1" placeholder="Category..."></td>
+                                    <td><textarea name="info1" placeholder="Information..."></textarea></td>
+                                    <td><textarea name="example1" placeholder="Examples..."></textarea></td>
+                                    <td><textarea name="importance1" placeholder="Why important..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="category2" placeholder="Category..."></td>
+                                    <td><textarea name="info2" placeholder="Information..."></textarea></td>
+                                    <td><textarea name="example2" placeholder="Examples..."></textarea></td>
+                                    <td><textarea name="importance2" placeholder="Why important..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="category3" placeholder="Category..."></td>
+                                    <td><textarea name="info3" placeholder="Information..."></textarea></td>
+                                    <td><textarea name="example3" placeholder="Examples..."></textarea></td>
+                                    <td><textarea name="importance3" placeholder="Why important..."></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addChartingRow()">Add Another Row</button>
+                </div>
+            </div>
+
+            <!-- Active Learning Elements Tab -->
+            <div class="form-section" id="active-learning">
+                <div class="section-header">Active Learning Elements</div>
+
+                <div class="input-group">
+                    <label>Key Concepts & Definitions</label>
+                    <div class="table-container">
+                        <table id="conceptsTable">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Definition</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody id="conceptsBody">
+                                <tr>
+                                    <td><input type="text" name="term1" placeholder="Term..."></td>
+                                    <td><textarea name="definition1" placeholder="Definition..."></textarea></td>
+                                    <td><textarea name="termExample1" placeholder="Example..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="term2" placeholder="Term..."></td>
+                                    <td><textarea name="definition2" placeholder="Definition..."></textarea></td>
+                                    <td><textarea name="termExample2" placeholder="Example..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="term3" placeholder="Term..."></td>
+                                    <td><textarea name="definition3" placeholder="Definition..."></textarea></td>
+                                    <td><textarea name="termExample3" placeholder="Example..."></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addConceptRow()">Add Another Term</button>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label>Important Formulas/Processes</label>
+                    <div class="input-row">
+                        <div>
+                            <label for="formula1">Formula/Process:</label>
+                            <textarea id="formula1" name="formula1" placeholder="Write the formula or describe the process..."></textarea>
+                        </div>
+                        <div>
+                            <label for="formulaUse1">When to use:</label>
+                            <textarea id="formulaUse1" name="formulaUse1" placeholder="When would you use this?"></textarea>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="formulaExample1">Example:</label>
+                        <textarea id="formulaExample1" name="formulaExample1" placeholder="Provide a specific example..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label for="questionsArising">Questions that came up during the session:</label>
+                    <textarea id="questionsArising" name="questionsArising" class="large-textarea" placeholder="What questions occurred to you while taking notes?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="unclearPoints">Points I didn't understand:</label>
+                    <textarea id="unclearPoints" name="unclearPoints" placeholder="What needs clarification?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="needResearch">Need to research later:</label>
+                    <textarea id="needResearch" name="needResearch" placeholder="What topics require further investigation?"></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label for="personalInsights">"Aha!" moments and personal insights:</label>
+                    <textarea id="personalInsights" name="personalInsights" class="large-textarea" placeholder="What insights or connections did you make?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="connectionsOther">Connections to other subjects:</label>
+                    <textarea id="connectionsOther" name="connectionsOther" placeholder="How does this relate to other courses or knowledge?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="realWorldApplications">Real-world applications:</label>
+                    <textarea id="realWorldApplications" name="realWorldApplications" placeholder="How might this be applied in real life?"></textarea>
+                </div>
+            </div>
+
+            <!-- Summary Tab -->
+            <div class="form-section" id="summary">
+                <div class="section-header">Summary & Key Points</div>
+
+                <div class="highlight-tip">
+                    <strong>Summary Tip:</strong> Write your summary without looking at your detailed notes first. This tests your understanding and identifies gaps in your knowledge.
+                </div>
+
+                <div class="input-group">
+                    <label for="mainPoint1">Most important concept:</label>
+                    <textarea id="mainPoint1" name="mainPoint1" placeholder="What was the most important thing you learned today?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="mainPoint2">Second key point:</label>
+                    <textarea id="mainPoint2" name="mainPoint2" placeholder="What was the second most important concept?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="mainPoint3">Third key point:</label>
+                    <textarea id="mainPoint3" name="mainPoint3" placeholder="What was the third key concept?"></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label for="bigPictureFit">How does today's content fit into the course?</label>
+                    <textarea id="bigPictureFit" name="bigPictureFit" class="large-textarea" placeholder="Connect today's learning to the broader course context..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="mainTakeaway">What's the main takeaway?</label>
+                    <textarea id="mainTakeaway" name="mainTakeaway" placeholder="If you had to explain today's lesson in one sentence, what would it be?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="futureUtility">How will this be useful later?</label>
+                    <textarea id="futureUtility" name="futureUtility" placeholder="How will you use this knowledge in future learning or your career?"></textarea>
+                </div>
+            </div>
+
+            <!-- Post-Review Tab -->
+            <div class="form-section" id="review">
+                <div class="section-header">Post-Note Review & Planning</div>
+
+                <div class="input-group">
+                    <label>Immediate Review Checklist (Within 24 hours):</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="reviewClarify" name="immediateReview" value="reviewClarify">
+                            <label for="reviewClarify">Reviewed and clarified notes</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="addedMissing" name="immediateReview" value="addedMissing">
+                            <label for="addedMissing">Added missing information</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="highlighted" name="immediateReview" value="highlighted">
+                            <label for="highlighted">Highlighted key points</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="studyQuestions" name="immediateReview" value="studyQuestions">
+                            <label for="studyQuestions">Created study questions</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="discussedUnclear" name="immediateReview" value="discussedUnclear">
+                            <label for="discussedUnclear">Discussed unclear points with classmates/teacher</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label>Best study strategies for reviewing this material:</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="flashcards" name="studyStrategies" value="flashcards">
+                            <label for="flashcards">Flashcards for definitions</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="practiceProblems" name="studyStrategies" value="practiceProblems">
+                            <label for="practiceProblems">Practice problems</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="teachSomeone" name="studyStrategies" value="teachSomeone">
+                            <label for="teachSomeone">Teach someone else</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="createDiagrams" name="studyStrategies" value="createDiagrams">
+                            <label for="createDiagrams">Create diagrams/charts</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="groupStudy" name="studyStrategies" value="groupStudy">
+                            <label for="groupStudy">Group study</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="otherStrategies">Other strategies:</label>
+                        <input type="text" id="otherStrategies" name="otherStrategies" placeholder="Any other study methods?">
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label>Follow-Up Actions:</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="completeReading" name="followUpActions" value="completeReading">
+                            <label for="completeReading">Complete assigned reading</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="reviewRelated" name="followUpActions" value="reviewRelated">
+                            <label for="reviewRelated">Review related materials</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="prepareQuestions" name="followUpActions" value="prepareQuestions">
+                            <label for="prepareQuestions">Prepare questions for next class</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="startAssignments" name="followUpActions" value="startAssignments">
+                            <label for="startAssignments">Start working on assignments</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="scheduleStudy" name="followUpActions" value="scheduleStudy">
+                            <label for="scheduleStudy">Schedule study time</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="otherActions">Other actions:</label>
+                        <input type="text" id="otherActions" name="otherActions" placeholder="Any other follow-up tasks?">
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label for="noteEffectiveness">What worked well in my note-taking today?</label>
+                    <textarea id="noteEffectiveness" name="noteEffectiveness" placeholder="Reflect on your note-taking process..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="improvements">What could I improve next time?</label>
+                    <textarea id="improvements" name="improvements" placeholder="What will you do differently next time?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="capturedImportant">Did I capture the most important information?</label>
+                    <textarea id="capturedImportant" name="capturedImportant" placeholder="Assess whether you got the key points..."></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="rating-scale">
+                    <label style="margin-right: 20px;"><strong>Understanding Level:</strong></label>
+                    <input type="radio" id="understand1" name="understandingLevel" value="1">
+                    <label for="understand1">1</label>
+                    <input type="radio" id="understand2" name="understandingLevel" value="2">
+                    <label for="understand2">2</label>
+                    <input type="radio" id="understand3" name="understandingLevel" value="3">
+                    <label for="understand3">3</label>
+                    <input type="radio" id="understand4" name="understandingLevel" value="4">
+                    <label for="understand4">4</label>
+                    <input type="radio" id="understand5" name="understandingLevel" value="5">
+                    <label for="understand5">5</label>
+                    <span style="margin-left: 20px; font-size: 0.9em; color: #6c757d;">(1 = Poor, 5 = Excellent)</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="confident">What I'm confident about:</label>
+                    <textarea id="confident" name="confident" placeholder="What concepts do you feel you understand well?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="needReview">What I need to review:</label>
+                    <textarea id="needReview" name="needReview" placeholder="What areas need more attention?"></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label for="nextClassPreview">What we'll likely cover next:</label>
+                    <textarea id="nextClassPreview" name="nextClassPreview" placeholder="Based on today's lesson, what do you think comes next?"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="todayConnection">How today's material will connect:</label>
+                    <textarea id="todayConnection" name="todayConnection" placeholder="How will today's learning build into future topics?"></textarea>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="input-group">
+                    <label>Quick Reference for Next Review</label>
+                    <div class="input-row">
+                        <div>
+                            <label for="keyTerm1">Key Term 1:</label>
+                            <input type="text" id="keyTerm1" name="keyTerm1" placeholder="Important term to remember">
+                        </div>
+                        <div>
+                            <label for="keyTerm2">Key Term 2:</label>
+                            <input type="text" id="keyTerm2" name="keyTerm2" placeholder="Important term to remember">
+                        </div>
+                        <div>
+                            <label for="keyTerm3">Key Term 3:</label>
+                            <input type="text" id="keyTerm3" name="keyTerm3" placeholder="Important term to remember">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="importantDates">Important Dates/Deadlines:</label>
+                    <textarea id="importantDates" name="importantDates" placeholder="List any important dates mentioned..."></textarea>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-success" onclick="saveData()">💾 Save Progress</button>
+                <button type="button" class="btn btn-primary" onclick="exportToGoogle()">📄 Export to Google Docs</button>
+                <button type="button" class="btn btn-info" onclick="printNotes()">🖨️ Print Notes</button>
+                <button type="button" class="btn btn-secondary" onclick="clearForm()">🗑️ Clear Form</button>
+            </div>
+        </form>
+
+        <!-- Quick Actions Sidebar -->
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="saveData()" title="Quick Save">💾</button>
+            <button class="quick-btn" onclick="showTab('main-notes')" title="Go to Notes">📝</button>
+            <button class="quick-btn" onclick="exportToGoogle()" title="Export">📤</button>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="exportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Export to Google Docs</h3>
+                <p>Copy the formatted content below and paste it into a new Google Doc:</p>
+            </div>
+            <textarea class="export-text" id="exportText" readonly></textarea>
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chartingRowCount = 3;
+        let conceptRowCount = 3;
+
+        function showTab(tabName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.form-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section and tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function selectMethod(method) {
+            // Remove selection from all methods
+            const options = document.querySelectorAll('.method-option');
+            options.forEach(option => option.classList.remove('selected'));
+            
+            // Hide all method sections
+            const methods = document.querySelectorAll('.note-method');
+            methods.forEach(m => m.style.display = 'none');
+            
+            // Select current method
+            event.currentTarget.classList.add('selected');
+            document.getElementById(`method-${method}`).checked = true;
+            
+            // Show selected method section
+            document.getElementById(`${method}-section`).style.display = 'block';
+        }
+
+        function addChartingRow() {
+            chartingRowCount++;
+            const tbody = document.getElementById('chartingBody');
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td><input type="text" name="category${chartingRowCount}" placeholder="Category..."></td>
+                <td><textarea name="info${chartingRowCount}" placeholder="Information..."></textarea></td>
+                <td><textarea name="example${chartingRowCount}" placeholder="Examples..."></textarea></td>
+                <td><textarea name="importance${chartingRowCount}" placeholder="Why important..."></textarea></td>
+            `;
+        }
+
+        function addConceptRow() {
+            conceptRowCount++;
+            const tbody = document.getElementById('conceptsBody');
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td><input type="text" name="term${conceptRowCount}" placeholder="Term..."></td>
+                <td><textarea name="definition${conceptRowCount}" placeholder="Definition..."></textarea></td>
+                <td><textarea name="termExample${conceptRowCount}" placeholder="Example..."></textarea></td>
+            `;
+        }
+
+        function saveData() {
+            const formData = new FormData(document.getElementById('notesTakingForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Handle checkboxes
+            const immediateReview = [];
+            const studyStrategies = [];
+            const followUpActions = [];
+            document.querySelectorAll('input[name="immediateReview"]:checked').forEach(cb => immediateReview.push(cb.value));
+            document.querySelectorAll('input[name="studyStrategies"]:checked').forEach(cb => studyStrategies.push(cb.value));
+            document.querySelectorAll('input[name="followUpActions"]:checked').forEach(cb => followUpActions.push(cb.value));
+            
+            data.immediateReview = immediateReview;
+            data.studyStrategies = studyStrategies;
+            data.followUpActions = followUpActions;
+            
+            localStorage.setItem('notesTakingData', JSON.stringify(data));
+            alert('Notes saved successfully! 📝');
+        }
+
+        function loadData() {
+            const savedData = localStorage.getItem('notesTakingData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                
+                for (const [key, value] of Object.entries(data)) {
+                    if (key === 'immediateReview' || key === 'studyStrategies' || key === 'followUpActions') {
+                        value.forEach(val => {
+                            const checkbox = document.querySelector(`input[name="${key}"][value="${val}"]`);
+                            if (checkbox) checkbox.checked = true;
+                        });
+                    } else if (key === 'understandingLevel' || key === 'noteMethod') {
+                        const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
+                        if (radio) {
+                            radio.checked = true;
+                            if (key === 'noteMethod') {
+                                selectMethod(value);
+                            }
+                        }
+                    } else {
+                        const field = document.querySelector(`[name="${key}"]`);
+                        if (field) field.value = value;
+                    }
+                }
+            }
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all notes? This cannot be undone.')) {
+                document.getElementById('notesTakingForm').reset();
+                localStorage.removeItem('notesTakingData');
+                // Reset method sections
+                document.querySelectorAll('.note-method').forEach(m => m.style.display = 'none');
+                document.querySelectorAll('.method-option').forEach(option => option.classList.remove('selected'));
+            }
+        }
+
+        function printNotes() {
+            window.print();
+        }
+
+        function exportToGoogle() {
+            const formData = new FormData(document.getElementById('notesTakingForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Get checked items
+            const immediateReview = [];
+            const studyStrategies = [];
+            const followUpActions = [];
+            document.querySelectorAll('input[name="immediateReview"]:checked').forEach(cb => {
+                immediateReview.push(cb.nextElementSibling.textContent);
+            });
+            document.querySelectorAll('input[name="studyStrategies"]:checked').forEach(cb => {
+                studyStrategies.push(cb.nextElementSibling.textContent);
+            });
+            document.querySelectorAll('input[name="followUpActions"]:checked').forEach(cb => {
+                followUpActions.push(cb.nextElementSibling.textContent);
+            });
+
+            const noteMethod = document.querySelector('input[name="noteMethod"]:checked')?.value || 'Not selected';
+            
+            const exportText = `
+NOTE-TAKING TEMPLATE - EVANGEL UNIVERSITY
+
+Student: ${data.studentName || '[Name]'}
+Date: ${data.date || '[Date]'}
+Course/Subject: ${data.course || '[Course]'}
+Topic/Lecture Title: ${data.topicTitle || '[Topic]'}
+Source: ${data.source || '[Source]'}
+
+════════════════════════════════════════════════════════
+
+PRE-NOTE SETUP
+
+Learning Objectives:
+What am I supposed to learn today?
+${data.learningObjectives || '[Your response]'}
+
+Key Questions to Focus On:
+${data.keyQuestions || '[Your response]'}
+
+Connection to Previous Lessons:
+${data.previousConnection || '[Your response]'}
+
+════════════════════════════════════════════════════════
+
+MAIN NOTES
+
+Note-Taking Method Used: ${noteMethod}
+
+${noteMethod === 'cornell' ? `
+CORNELL NOTES:
+
+Cue Column:
+${data.cornellCues || '[Key terms, questions, main points]'}
+
+Note-Taking Area:
+${data.cornellNotes || '[Detailed notes, examples, explanations]'}
+` : ''}
+
+${noteMethod === 'outline' ? `
+OUTLINE NOTES:
+${data.outlineNotes || '[Structured outline content]'}
+` : ''}
+
+${noteMethod === 'mapping' ? `
+MIND MAPPING NOTES:
+Central Concept: ${data.centralConcept || '[Main topic]'}
+
+Visual/Mapping Structure:
+${data.mappingNotes || '[Mind map description]'}
+` : ''}
+
+${noteMethod === 'charting' ? `
+CHARTING METHOD:
+${Array.from(document.querySelectorAll('#chartingTable tbody tr')).map((row, i) => {
+    const cells = row.querySelectorAll('input, textarea');
+    if (cells[0]?.value || cells[1]?.value || cells[2]?.value || cells[3]?.value) {
+        return `Category: ${cells[0]?.value || '[Category]'}
+Information: ${cells[1]?.value || '[Information]'}
+Examples: ${cells[2]?.value || '[Examples]'}
+Importance: ${cells[3]?.value || '[Importance]'}`;
+    }
+    return '';
+}).filter(s => s).join('\n\n')}
+` : ''}
+
+════════════════════════════════════════════════════════
+
+ACTIVE LEARNING ELEMENTS
+
+Key Concepts & Definitions:
+${Array.from(document.querySelectorAll('#conceptsTable tbody tr')).map((row, i) => {
+    const cells = row.querySelectorAll('input, textarea');
+    if (cells[0]?.value || cells[1]?.value || cells[2]?.value) {
+        return `• ${cells[0]?.value || '[Term]'}: ${cells[1]?.value || '[Definition]'}
+  Example: ${cells[2]?.value || '[Example]'}`;
+    }
+    return '';
+}).filter(s => s).join('\n\n')}
+
+Important Formulas/Processes:
+Formula/Process: ${data.formula1 || '[Formula or process]'}
+When to use: ${data.formulaUse1 || '[Usage context]'}
+Example: ${data.formulaExample1 || '[Specific example]'}
+
+Questions & Clarifications:
+Questions that came up: ${data.questionsArising || '[Your questions]'}
+Points I didn't understand: ${data.unclearPoints || '[Unclear points]'}
+Need to research later: ${data.needResearch || '[Research topics]'}
+
+Personal Insights & Connections:
+"Aha!" moments: ${data.personalInsights || '[Your insights]'}
+Connections to other subjects: ${data.connectionsOther || '[Subject connections]'}
+Real-world applications: ${data.realWorldApplications || '[Applications]'}
+
+════════════════════════════════════════════════════════
+
+SUMMARY SECTION
+
+Main Points Recap:
+1. Most important concept: ${data.mainPoint1 || '[First key point]'}
+2. Second key point: ${data.mainPoint2 || '[Second key point]'}
+3. Third key point: ${data.mainPoint3 || '[Third key point]'}
+
+The Big Picture:
+How does today's content fit into the course?
+${data.bigPictureFit || '[Course connection]'}
+
+Main takeaway: ${data.mainTakeaway || '[Key takeaway]'}
+
+How will this be useful later?
+${data.futureUtility || '[Future applications]'}
+
+════════════════════════════════════════════════════════
+
+POST-NOTE REVIEW
+
+Immediate Review Checklist (Within 24 hours):
+${immediateReview.length > 0 ? immediateReview.map(item => `✓ ${item}`).join('\n') : '[None completed yet]'}
+
+Study Strategies for this material:
+${studyStrategies.length > 0 ? studyStrategies.map(item => `• ${item}`).join('\n') : '[No strategies selected]'}
+${data.otherStrategies ? `• Other: ${data.otherStrategies}` : ''}
+
+Follow-Up Actions:
+${followUpActions.length > 0 ? followUpActions.map(item => `□ ${item}`).join('\n') : '[No actions planned]'}
+${data.otherActions ? `□ Other: ${data.otherActions}` : ''}
+
+════════════════════════════════════════════════════════
+
+REFLECTION & SELF-ASSESSMENT
+
+Note-Taking Effectiveness:
+What worked well: ${data.noteEffectiveness || '[Your reflection]'}
+What could I improve next time: ${data.improvements || '[Areas for improvement]'}
+Did I capture the most important information: ${data.capturedImportant || '[Assessment]'}
+
+Comprehension Check:
+Understanding level: ${data.understandingLevel || '[Not rated]'}/5
+What I'm confident about: ${data.confident || '[Confident areas]'}
+What I need to review: ${data.needReview || '[Review areas]'}
+
+════════════════════════════════════════════════════════
+
+QUICK REFERENCE FOR NEXT REVIEW
+
+Key Terms to Remember:
+1. ${data.keyTerm1 || '[Term 1]'}
+2. ${data.keyTerm2 || '[Term 2]'}  
+3. ${data.keyTerm3 || '[Term 3]'}
+
+Important Dates/Deadlines:
+${data.importantDates || '[No dates listed]'}
+
+Next Class Preview:
+What we'll likely cover next: ${data.nextClassPreview || '[Preview]'}
+How today's material will connect: ${data.todayConnection || '[Connection]'}
+
+════════════════════════════════════════════════════════
+Generated by Evangel University Note-Taking Template
+Date: ${new Date().toLocaleDateString()}
+            `.trim();
+
+            document.getElementById('exportText').value = exportText;
+            document.getElementById('exportModal').style.display = 'flex';
+        }
+
+        function copyToClipboard() {
+            const exportText = document.getElementById('exportText');
+            exportText.select();
+            document.execCommand('copy');
+            alert('Notes copied to clipboard! 📋 You can now paste them into Google Docs.');
+        }
+
+        function closeModal() {
+            document.getElementById('exportModal').style.display = 'none';
+        }
+
+        // Event listeners
+        window.addEventListener('load', loadData);
+        
+        // Auto-save every 30 seconds
+        setInterval(saveData, 30000);
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 's') {
+                    e.preventDefault();
+                    saveData();
+                }
+                if (e.key === 'e') {
+                    e.preventDefault();
+                    exportToGoogle();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
