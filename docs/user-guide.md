@@ -17,19 +17,19 @@
 - Reflect on connections and applications
 - Plan follow-up actions
 
-#### 🤔 Reflective Application Template  
-**When to Use**: After learning new concepts that need deep analysis
-- Analyze strengths and limitations of theories
-- Connect learning to personal experience
-- Plan real-world applications
-- Set future learning goals
-
 #### 📝 Note-Taking Template
 **When to Use**: During lectures, videos, or active study sessions
 - Choose from 4 note-taking methods
 - Track key concepts and formulas
 - Plan review strategies
 - Assess understanding levels
+
+#### 🤔 Reflective Application Template  
+**When to Use**: After learning new concepts that need deep analysis
+- Analyze strengths and limitations of theories
+- Connect learning to personal experience
+- Plan real-world applications
+- Set future learning goals
 
 ## Features Explained
 
