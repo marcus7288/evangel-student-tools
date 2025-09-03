@@ -5,16 +5,16 @@ Interactive web-based study tools designed to enhance learning through research-
 ## 🚀 Live Templates
 
 - **[Active Reading Template](https://marcus7288.github.io/evangel-student-tools/templates/active-reading.html)**
-- **[Reflective Application Template](https://marcus7288.github.io/evangel-student-tools/templates/reflective-application.html)**
 - **[Note-Taking Template](https://marcus7288.github.io/evangel-student-tools/templates/note-taking.html)**
+- **[Reflective Application Template](https://marcus7288.github.io/evangel-student-tools/templates/reflective-application.html)**
 
 ## 📚 About
 
 These templates are designed for Evangel University students to enhance their study effectiveness through:
 
 - **Active Reading**: Pre-reading preparation, engagement strategies, and post-reading reflection
-- **Reflective Application**: Deep analysis connecting learning to personal experience and goals
 - **Interactive Note-Taking**: Multiple methods, including Cornell Notes, outlining, mind mapping, and charting
+- **Reflective Application**: Deep analysis connecting learning to personal experience and goals
 
 ## ✨ Features
 
