@@ -1,4 +1,4 @@
-# User Guide - Evangel University Study Templates
+# User Guide - Evangel University Study Tools
 
 ## Getting Started
 
